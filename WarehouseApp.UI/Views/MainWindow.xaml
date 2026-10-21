@@ -1,0 +1,52 @@
+﻿<Window x:Class="WarehouseApp.UI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarehouseApp.UI"
+        mc:Ignorable="d"
+        Title="Организации" Height="450" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход" Click="CloseButton_Click"/>
+            </MenuItem>
+            <MenuItem Header="Справочники">
+                <MenuItem Header="Организации" IsEnabled="False"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView Grid.Column="0" ItemsSource="{Binding Organizations}" 
+                      SelectedItem="{Binding SelectedOrganization}" Margin="0,0,10,0">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Новая организация" Command="{Binding AddCommand}"/>
+                        <MenuItem Header="Изменить организацию" Command="{Binding EditCommand}"/>
+                        <MenuItem Header="Удалить организацию" Command="{Binding DeleteCommand}"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Организации" DisplayMemberBinding="{Binding Name}" Width="350"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <StackPanel Grid.Column="1">
+                <Button Content="ОК" Command="{Binding OpenWarehousesCommand}" Margin="0,0,0,10" Height="30"/>
+                <Button Content="Закрыть" Click="CloseButton_Click" Height="30"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
